@@ -26,6 +26,15 @@ document.title = 'Drawify · ' + L[0];
 document.getElementById('title').textContent = L[0];
 document.getElementById('lead').textContent = code ? L[1] : L[7];
 document.getElementById('get').textContent = L[5];
+// İndirme düğmesi cihazın kendi mağazasına: Android → Google Play; iPhone / iPad → App Store (kimlik gelince
+// APP_STORE_URL doldurulur; o zamana kadar düğme gizli — Apple 2.3.10: başka platform anılmaz)
+var APP_STORE_URL = '';
+var isApple = /iPhone|iPad|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+if (isApple) {
+  var getBtn = document.getElementById('get');
+  if (APP_STORE_URL) getBtn.href = APP_STORE_URL;
+  else getBtn.style.display = 'none';
+}
 document.getElementById('hint').textContent = L[6];
 var copyBtn = document.getElementById('copy');
 var openBtn = document.getElementById('open');
